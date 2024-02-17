@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            min-height: 100vh;
+            background: #181414;
+            display: grid;
+            place-items: center;
+        }
+        .gameArea{
+            width: 300px;
+            height: 500px;
+            background-color: #000000;
+            position: relative;
+            overflow: hidden;
+            /* overflow-y: scroll; */
+        }
+        .lines{
+            position: absolute;
+            width: 30px;
+            height: 200px;
+            background: rgb(255, 250, 250);
+            top: 10px;
+            left: 135px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="gameArea"> </div>  
+    <button class="start"> Start Animation </button>
+
+    <script>
+        let obj = {
+            speed: 5
+        }
+
+        let GameArea =  document.querySelector('.gameArea');
+        let btn = document.getElementsByClassName('start');
+        btn = addEventListener('click', anim)
+        function anim(){
+            let i;
+            for(i=0; i<=5; i++){
+              let  createlines = document.createElement('div');
+                createlines.setAttribute('class','lines');
+                createlines.y = (i*250);
+                createlines.style.top = (i*250) + 'px';
+                GameArea.appendChild(createlines);
+            }
+            window.requestAnimationFrame(bot);
+        };
+        
+        function bot(){
+            animLines();
+            window.requestAnimationFrame(bot);
+        }
+        function animLines(){
+            let line = document.querySelectorAll('.lines');
+            line.forEach( function(val){
+                if(val.y>= 500){
+                val.y -= 1250;
+                }
+                 val.y += obj.speed;
+                 val.style.top = val.y + 'px'
+            });
+        }
+            
+           
+           
+            
+    </script>
+
+</body>
+</html>
